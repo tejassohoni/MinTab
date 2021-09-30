@@ -4,22 +4,23 @@ const getDateTime = (format) => {
   let completeDate = new Date();
   let dateTime = new Intl.DateTimeFormat(userLang, format).format(completeDate);
   return dateTime;
-}
+};
 
 const updateDateTime = () => {
   currentTime.innerHTML = getDateTime({
-    hour    : "numeric",
-    minute  : "numeric",
-    hour12  : CONFIG.hour12
+    hour: "numeric",
+    minute: "numeric",
+    hour12: CONFIG.hour12,
   });
 
   currentDate.innerHTML = getDateTime({
-    weekday : "long",
-    month   : "long",
-    day     : "numeric"
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
   });
 
   setTimeout(updateDateTime, 1000);
-}
+};
 
 updateDateTime();
