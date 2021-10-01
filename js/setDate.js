@@ -35,7 +35,7 @@ function datetime() {
   if (dd < 10) dd = "0" + dd;
 
   document.getElementById("currentTime").innerHTML =
-    hrs + ":" + mins + " " + tt + ", ";
+    hrs + ":" + mins + " " + tt +;
   document.getElementById("currentDate").innerHTML =
     days[day] + ", " + dd + " " + months[mm - 1] + " " + yy;
   setTimeout(datetime, 1000);
