@@ -1,26 +1,44 @@
 const userLang = (navigator.language || navigator.userLanguage) ?? "en-US";
 
-const getDateTime = (format) => {
-  let completeDate = new Date();
-  let dateTime = new Intl.DateTimeFormat(userLang, format).format(completeDate);
-  return dateTime;
-};
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
-const updateDateTime = () => {
-  currentTime.innerHTML = getDateTime({
-    hour: "numeric",
-    minute: "numeric",
-    hour12: CONFIG.hour12,
-  });
+function datetime() {
+  const today = new Date();
 
-  currentDate.innerHTML = getDateTime({
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+  let hrs = today.getHours(),
+    mins = today.getMinutes(),
+    tt = "AM",
+    day = today.getDay(),
+    dd = today.getDate(),
+    mm = today.getMonth() + 1,
+    yy = today.getFullYear();
 
-  setTimeout(updateDateTime, 1000);
-};
+  if (mins < 10) mins = "0" + mins;
+  if (hrs > 12) (hrs = hrs % 12), (tt = "PM");
+  else tt = "AM";
+  if (hrs < 10) hrs = "0" + hrs;
 
-updateDateTime();
+  if (dd < 10) dd = "0" + dd;
+
+  document.getElementById("currentTime").innerHTML =
+    hrs + ":" + mins + " " + tt + ", ";
+  document.getElementById("currentDate").innerHTML =
+    days[day] + ", " + dd + " " + months[mm - 1] + " " + yy;
+  setTimeout(datetime, 1000);
+}
+
+datetime();
